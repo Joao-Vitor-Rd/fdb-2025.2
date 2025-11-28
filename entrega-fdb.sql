@@ -283,10 +283,10 @@ CREATE TABLE HISTORICO (
 
 
 ------------------------------------------------------
--- Comandos DML para inserção de dados nas tabelas----
+-- Comandos DML para inserção de dados nas tabelas  --
 ------------------------------------------------------
 
--- Tabela Assistida
+-- Povoamento Tabela ASSISTIDA
 
 INSERT INTO ASSISTIDA (Nome, Idade, endereco, identidadeGenero, n_social, Escolaridade, Religiao, Nacionalidade, zona, ocupacao, cad_social, Dependentes, Cor_Raca, deficiencia, limitacao)
 VALUES 
@@ -381,7 +381,7 @@ VALUES
     ('Adelaide Martins Silva', 47, 'SERENO', 'MULHER CISGENERO', 'NIS089', 'ENSINO MEDIO INCOMPLETO', 'CATOLICA', 'BRASILEIRA', 'URBANA', 'LAVANDERIA', 'CAD089', 3, 'PARDA', 'NAO INFORMADO', 'NAO INFORMADO'),
     ('Bernadete Costa Alves', 39, 'JUAZEIRO', 'MULHER CISGENERO', 'NIS090', 'ENSINO SUPERIOR INCOMPLETO', 'EVANGELICA', 'BRASILEIRA', 'URBANA', 'COORDENADORA', 'CAD090', 2, 'BRANCA', 'NAO INFORMADO', 'NAO INFORMADO');
 
--- povoamento tabela FILHO
+-- Povoamento Tabela FILHO
 
 INSERT INTO FILHO (seq_filho, qtd_filhos_deficiencia, viu_violencia, violencia_gravidez, id_assistida, qtd_filho_agressor, qtd_filho_outro_relacionamento)
 VALUES 
@@ -467,7 +467,7 @@ VALUES
     (80, 0, false, true, 80, 2, 1);
 
 
--- povoamento tabela FAIXA_FILHO
+-- Povoamento Tabela FAIXA_FILHO
 INSERT INTO FAIXA_FILHO (id_assistida, id_filhos, faixa_etaria)
 VALUES 
     (1, 1, '0 A 11 ANOS'),
@@ -551,7 +551,7 @@ VALUES
     (79, 79, '0 A 11 ANOS'),
     (80, 80, 'A PARTIR DE 18 ANOS');
 
--- povoamento tabela CONFLITO_FILHO
+-- Povoamento Tabela CONFLITO_FILHO
 INSERT INTO CONFLITO_FILHO (tipo_conflito, id_assistida, seq_filho)
 VALUES 
     ('SIM, GUARDA DO(S) FILHO(S)', 1, 1),
@@ -635,7 +635,7 @@ VALUES
     ('SIM, PAGAMENTO DE PENSAO', 79, 79),
     ('NAO', 80, 80);
 
--- povoamento tabela CASO
+-- Povoamento Tabela CASO
 INSERT INTO CASO (Data, separacao, novo_relac, abrigo, depen_finc, mora_risco, medida, frequencia, id_assistida, outras_informacoes)
 VALUES 
     ('2025-11-20', 'SIM', false, false, true, 'SIM', true, true, 1, 'SITUACAO DE RISCO MODERADO. ACOMPANHAMENTO CONTINUO NECESSARIO.'),
@@ -752,7 +752,7 @@ VALUES
     ('2025-11-26', 'NAO', false, true, true, 'NAO', false, true, 81, 'QUINTO CASO - NOVA AMEACA.'),
     ('2025-11-26', 'SIM', false, false, true, 'SIM', true, true, 85, 'QUARTO CASO - MONITORAMENTO CONTINUO.');
 
--- povoamento tabela AGRESSOR
+-- Povoamento Tabela AGRESSOR
 INSERT INTO AGRESSOR (id_caso, id_assistida, Nome, Idade, Vinculo, doenca, medida_protetiva, suicidio, financeiro, arma_de_fogo)
 VALUES 
     (1, 1, 'Carlos Alberto Santos', 40, 'MARIDO', '', false, false, true, false),
@@ -870,7 +870,7 @@ VALUES
     (113, 85, 'Osmar Barbosa Ferreira', 41, 'MARIDO', '', false, false, true, false);
 
 
--- povoamento tabela SUBSTANCIAS_AGRESSOR
+-- Povoamento Tabela SUBSTANCIAS_AGRESSOR
 INSERT INTO SUBSTANCIAS_AGRESSOR (id_caso, id_assistida, id_agressor, tipo_substancia)
 VALUES 
     (1, 1, 1, 'SIM, DE ALCOOL'),
@@ -964,7 +964,7 @@ VALUES
     (89, 83, 89, 'SIM, DE ALCOOL'),
     (90, 83, 90, 'NAO');
 
--- povoamento tabela AMEACA_AGRESSOR
+-- Povoamento Tabela AMEACA_AGRESSOR
 INSERT INTO AMEACA_AGRESSOR (id_caso, id_assistida, id_agressor, alvo_ameaca)
 VALUES 
     (1, 1, 1, 'A_VITIMA'), (1, 1, 1, 'FILHOS'),
@@ -1058,7 +1058,7 @@ VALUES
     (89, 83, 89, 'FAMILIARES'), (89, 83, 89, 'NAO_SEI'),
     (90, 83, 90, 'OUTRAS_PESSOAS'), (90, 83, 90, 'ANIMAIS');
 
---povoamento tabela FUNCIONARIO
+--Povoamento Tabela FUNCIONARIO
 INSERT INTO FUNCIONARIO (Email, Nome, Cargo, Senha) VALUES
 ('ana.silva@procuradoria.gov.br', 'Ana Silva', 'Coordenadora', 'S3nha#01'),
 ('bruno.costa@procuradoria.gov.br', 'Bruno Costa', 'Advogado', 'S3nha#02'),
@@ -1141,7 +1141,7 @@ INSERT INTO FUNCIONARIO (Email, Nome, Cargo, Senha) VALUES
 ('joana.dark@procuradoria.gov.br', 'Joana Dark', 'Advogada', 'S3nha#79'),
 ('mario.bros@procuradoria.gov.br', 'Mario Bros', 'Encanador Predial', 'S3nha#80');
 
--- povoamento tabela ADMINISTRADOR
+-- Povoamento Tabela ADMINISTRADOR
 INSERT INTO ADMINISTRADOR (Email) VALUES
 ('ana.silva@procuradoria.gov.br'),
 ('bruno.costa@procuradoria.gov.br'),
@@ -1224,7 +1224,7 @@ INSERT INTO ADMINISTRADOR (Email) VALUES
 ('joana.dark@procuradoria.gov.br'),
 ('mario.bros@procuradoria.gov.br');
 
--- povoamento tabela FUNCIONARIO_ACOMPANHA_CASO
+-- Povoamento Tabela FUNCIONARIO_ACOMPANHA_CASO
 INSERT INTO FUNCIONARIO_ACOMPANHA_CASO (email_funcionario, id_caso) VALUES
 ('ana.silva@procuradoria.gov.br', 1),
 ('bruno.costa@procuradoria.gov.br', 2),
@@ -1309,7 +1309,7 @@ INSERT INTO FUNCIONARIO_ACOMPANHA_CASO (email_funcionario, id_caso) VALUES
 ('mario.bros@procuradoria.gov.br', 40);
 
 
--- povoamento tabela VIOLENCIA
+-- Povoamento Tabela VIOLENCIA
 INSERT INTO VIOLENCIA (id_caso, id_assistida, estupro, data_ocorrencia)
 SELECT 
     id_caso, 
@@ -1324,7 +1324,7 @@ LIMIT 80;
 SELECT setval('violencia_id_violencia_seq', (SELECT MAX(id_violencia) FROM VIOLENCIA));
 
 
--- povoamento TIPO_VIOLENCIA
+-- Povoamento Tabela TIPO_VIOLENCIA
 INSERT INTO TIPO_VIOLENCIA (id_violencia, id_caso, id_assistida, tipo_violencia)
 SELECT 
     id_violencia, 
@@ -1339,7 +1339,7 @@ SELECT
     END as tipo_violencia
 FROM VIOLENCIA;
 
--- povoamento AGRESSAO_VIOLENCIA
+-- Povoamento Tabela AGRESSAO_VIOLENCIA
 INSERT INTO AGRESSAO_VIOLENCIA (id_violencia, id_caso, id_assistida, tipo_agressao)
 SELECT 
     id_violencia, 
@@ -1364,7 +1364,7 @@ SELECT
 FROM VIOLENCIA
 ORDER BY id_violencia ASC;
 
---povoamento tabela PREENCHIMENTO_PROFISSIONAL
+--Povoamento Tabela PREENCHIMENTO_PROFISSIONAL
 INSERT INTO PREENCHIMENTO_PROFISSIONAL (
     id_preenchimento,
     id_caso,
@@ -1395,7 +1395,7 @@ FROM (
     LIMIT 80
 ) as sorteio;
 
---povoamento HISTORICO
+--Povoamento Tabela HISTORICO
 INSERT INTO HISTORICO (id_func, tipo, mudanca, id_caso, id_assistida)
 SELECT
     -- 1. Sorteia um funcionário aleatório da tabela FUNCIONARIO

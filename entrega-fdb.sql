@@ -1432,9 +1432,7 @@ LIMIT 80;
 -- Queries SQL  --
 ------------------
 
--- Query 1: Query utilizada no nosso sistema back-end para retornar dados 
--- para gráfico de pizza, no qual mostra a quantidade de casos ocorridos
--- em cada localidade.
+-- Query 1: Query utilizada no nosso sistema back-end para retornar dados para gráfico de pizza, no qual mostra a quantidade de casos ocorridos em cada localidade.
 
 SELECT 
     a.endereco, COUNT(*) as quantidade            
@@ -1445,10 +1443,7 @@ AND a.endereco IS NOT NULL
 GROUP BY a.endereco            
 ORDER BY quantidade DESC
 
--- Query 2: Query utilizada para trazer informações necessárias da 
--- tela de assistidas, no qual tem uma visão geral do caso relacionado 
--- a uma assistida, importantes para o jurídico ter uma análise dos tipos 
--- de violência e o agressor relacionado a um caso específico
+-- Query 2: Query utilizada para trazer informações necessárias da tela de assistidas, no qual tem uma visão geral do caso relacionado a uma assistida, importantes para o jurídico ter uma análise dos tipos de violência e o agressor relacionado a um caso específico
 
 SELECT
     c.id_caso,
@@ -1487,8 +1482,7 @@ WHERE (f.viu_violencia OR f.violencia_gravidez) AND f.qtd_filhos_deficiencia > 0
 GROUP BY a.endereco
 ORDER BY quantidade DESC
 
--- Query 4: Tempo médio entre a data de ocorrência da violência
--- e a data de realização da denúncia, categoriazado por tipo de violência.
+-- Query 4: Tempo médio entre a data de ocorrência da violência e a data de realização da denúncia, categoriazado por tipo de violência.
 
 select
     tpv.tipo_violencia as "Tipos de Violência",
@@ -1510,8 +1504,7 @@ group by
 order by
     "Média de dias até a realização da Denúncia" desc;
 
--- Query 5: Diferença em dias entre a data de ocorrência da violência e a data 
--- de realização da denúncia para casos onde a assistida possui filhos que são agressores. 
+-- Query 5: Diferença em dias entre a data de ocorrência da violência e a data de realização da denúncia para casos onde a assistida possui filhos que são agressores. 
 
 select 
   (c.data - v.data_ocorrencia) as "Dias de Diferença" 
@@ -1528,8 +1521,7 @@ and exists (
     and f.qtd_filho_agressor > 0 
 );
 
--- Query 6: Análise se o agressor estava sob efeito de algum entorpecente 
--- quando fez a agressão, quem ele agrediu, e quantas vezes:
+-- Query 6: Análise se o agressor estava sob efeito de algum entorpecente quando fez a agressão, quem ele agrediu, e quantas vezes:
 
 SELECT 
     sa.tipo_substancia AS Agressor_Sob_Efeito_De,
@@ -1544,8 +1536,7 @@ WHERE sa.tipo_substancia NOT ILIKE '%NAO%'
 GROUP BY sa.tipo_substancia, aa.alvo_ameaca, tv.tipo_violencia
 ORDER BY Ocorrencias DESC;
 
--- Query 7: Análise da média de tempo que uma assistida 
--- demora para prestar queixa dependendo do seu relacionamento com o agressor
+-- Query 7: Análise da média de tempo que uma assistida demora para prestar queixa dependendo do seu relacionamento com o agressor
 
 SELECT 
     ag.Vinculo AS Relacionamento,

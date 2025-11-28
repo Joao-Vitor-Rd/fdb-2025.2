@@ -1599,7 +1599,7 @@ LEFT JOIN
 GROUP BY ref.faixa, ref.id_ordem
 ORDER BY ref.id_ordem ASC;
 
--- Query 10: Ocorrência de Abuso Sexual em Assistidas com Deficiência ou Doença Degenerativa por Idade
+-- Query 10: Ocorrência de abuso sexual em Assistidas com deficiência ou doença degenerativa por idade
 
 select distinct
   a.id as "ID da Assistida",

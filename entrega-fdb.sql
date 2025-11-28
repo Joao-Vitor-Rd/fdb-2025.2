@@ -1445,7 +1445,6 @@ AND a.endereco IS NOT NULL
 GROUP BY a.endereco            
 ORDER BY quantidade DESC
 
-
 -- Query 2: Query utilizada para trazer informações necessárias da 
 -- tela de assistidas, no qual tem uma visão geral do caso relacionado 
 -- a uma assistida, importantes para o jurídico ter uma análise dos tipos 
@@ -1477,7 +1476,6 @@ a.id, a.nome, ag.nome,
 c.data, pp.assistida_respondeu_sem_ajuda, 
 pp.assistida_respondeu_com_auxilio, pp.assistida_sem_condicoes, 
 pp.assistida_recusou, pp.terceiro_comunicante
-
 
 -- Query 3: Endereços com maior número de filhos com deficiência que sofreram violência, ou que presenciaram violencia doméstica
 
@@ -1566,7 +1564,6 @@ ORDER BY AVG(c.data - v.data_ocorrencia) DESC
 
 -- Query 8: Análise de quantos tipos de agressão ocorreram com assistidas menores de idade
 
-
 SELECT 
     tipos_fixos.nome_tipo AS Tipo_de_Violencia,
     COUNT(DISTINCT dados_reais.id_assistida) AS Qtd_Vitimas_Menores
@@ -1611,3 +1608,36 @@ LEFT JOIN
 GROUP BY ref.faixa, ref.id_ordem
 ORDER BY ref.id_ordem ASC;
 
+-- Query 10: Ocorrência de Abuso Sexual em Assistidas com Deficiência ou Doença Degenerativa por Idade
+
+select distinct
+  a.id as "ID da Assistida",
+  a.idade as "Idade da Assistida",
+  ag.vinculo as "Vinculo da Assistida com o Agressor",
+  a.deficiencia as "Condição Limitante ou de Vunerabilidade Social"
+from assistida a
+join agressor ag ON a.id = ag.id_assistida
+join violencia v ON a.id = v.id_assistida
+where v.estupro is true and a.deficiencia != 'NAO INFORMADO'
+order by a.idade desc;
+
+-- Query 11: Tipo de Violência baseado em cor/raça
+
+select
+  brancas.tipo_violencia as "Tipo de Violência",
+  nbrancas.vitimas_nao_brancas as "Quantidade de Vítimas Não Brancas",
+  brancas.vitimas_brancas as "Quantidade de Vítimas Brancas"
+from
+  (select v.tipo_violencia, count(*) as "vitimas_brancas"
+    from assistida a
+    join tipo_violencia v on v.id_assistida = a.id
+    where a.cor_raca = 'BRANCA'
+    group by v.tipo_violencia) as brancas
+full outer join
+  (select v.tipo_violencia, count(*) as "vitimas_nao_brancas"
+    from assistida a
+    join tipo_violencia v on v.id_assistida = a.id
+    where a.cor_raca in ('PRETA','PARDA','INDÍGENA','AMARELA/ORIENTAL')
+    group by v.tipo_violencia) as nbrancas
+on brancas.tipo_violencia = nbrancas.tipo_violencia
+order by vitimas_nao_brancas desc;

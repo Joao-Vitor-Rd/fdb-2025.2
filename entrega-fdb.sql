@@ -1441,7 +1441,7 @@ FROM
 JOIN CASO c ON a.id = c.id_assistida            
 AND a.endereco IS NOT NULL            
 GROUP BY a.endereco            
-ORDER BY quantidade DESC
+ORDER BY quantidade DESC;
 
 -- Query 2: Query utilizada para trazer informações necessárias da tela de assistidas, no qual tem uma visão geral do caso relacionado a uma assistida, importantes para o jurídico ter uma análise dos tipos de violência e o agressor relacionado a um caso específico
 
@@ -1470,7 +1470,7 @@ c.id_caso,
 a.id, a.nome, ag.nome, 
 c.data, pp.assistida_respondeu_sem_ajuda, 
 pp.assistida_respondeu_com_auxilio, pp.assistida_sem_condicoes, 
-pp.assistida_recusou, pp.terceiro_comunicante
+pp.assistida_recusou, pp.terceiro_comunicante;
 
 -- Query 3: Endereços com maior número de filhos com deficiência que sofreram violência, ou que presenciaram violencia doméstica
 
@@ -1480,7 +1480,7 @@ FROM assistida a
 LEFT JOIN filho f ON a.id = f.id_assistida
 WHERE (f.viu_violencia OR f.violencia_gravidez) AND f.qtd_filhos_deficiencia > 0
 GROUP BY a.endereco
-ORDER BY quantidade DESC
+ORDER BY quantidade DESC;
 
 -- Query 4: Tempo médio entre a data de ocorrência da violência e a data de realização da denúncia, categoriazado por tipo de violência.
 
@@ -1551,7 +1551,7 @@ WHERE
     v.data_ocorrencia IS NOT NULL 
     AND c.data >= v.data_ocorrencia
 GROUP BY ag.Vinculo
-ORDER BY AVG(c.data - v.data_ocorrencia) DESC
+ORDER BY AVG(c.data - v.data_ocorrencia) DESC;
 
 -- Query 8: Análise de quantos tipos de agressão ocorreram com assistidas menores de idade
 
@@ -1632,3 +1632,38 @@ full outer join
     group by v.tipo_violencia) as nbrancas
 on brancas.tipo_violencia = nbrancas.tipo_violencia
 order by vitimas_nao_brancas desc;
+
+-- Query 12: Análise comparativa da prevalência de violência patrimonial e psicológica segregada pelo status de dependência financeira da vítima
+
+SELECT 
+    CASE 
+        WHEN C.depen_finc = true THEN 'SIM - Dependente' 
+        ELSE 'NÃO - Independente' 
+    END AS "Dependência Financeira",
+    COUNT(DISTINCT C.id_caso) AS "Total de Casos",
+    COUNT(DISTINCT CASE WHEN TV.tipo_violencia = 'Patrimonial' OR TV.tipo_violencia = 'PATRIMONIAL' THEN C.id_caso END) AS "Qtd. Violência Patrimonial",  
+    ROUND(
+        (COUNT(DISTINCT CASE WHEN TV.tipo_violencia = 'Patrimonial' OR TV.tipo_violencia = 'PATRIMONIAL' THEN C.id_caso END) * 100.0) / 
+        COUNT(DISTINCT C.id_caso), 2
+    ) || '%' AS "% Sofrem Violência Patrimonial",
+    ROUND(
+        (COUNT(DISTINCT CASE WHEN TV.tipo_violencia = 'Psicológica' OR TV.tipo_violencia = 'PSICOLÓGICA' THEN C.id_caso END) * 100.0) / 
+        COUNT(DISTINCT C.id_caso), 2
+    ) || '%' AS "% Sofrem Violência Psicológica"
+FROM CASO C
+JOIN VIOLENCIA V ON C.id_caso = V.id_caso
+JOIN TIPO_VIOLENCIA TV ON V.id_violencia = TV.id_violencia
+GROUP BY C.depen_finc
+ORDER BY C.depen_finc DESC;
+
+-- Query 13: Distribuição percentual das assistidas estratificada por nível de escolaridade para identificação do perfil educacional predominante
+
+SELECT  
+    A.escolaridade AS "Nível de Escolaridade",   
+    COUNT(A.id) AS "Total de Vítimas",
+    ROUND(
+        (COUNT(A.id) * 100.0) / (SELECT COUNT(*) FROM ASSISTIDA), 1
+    ) || '%' AS "% do Total"
+FROM ASSISTIDA A
+GROUP BY A.escolaridade
+ORDER BY "Total de Vítimas" DESC;

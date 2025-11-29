@@ -250,12 +250,6 @@ CREATE TABLE PREENCHIMENTO_PROFISSIONAL (
     FOREIGN KEY (id_caso) REFERENCES CASO(id_caso) ON DELETE CASCADE
 );
 
-CREATE TABLE TIPO_VIOLENCIA_PREENCHIMENTO (
-    id_preenchimento integer NOT NULL,
-    tipo_violencia character varying(80) NOT NULL,
-    PRIMARY KEY (id_preenchimento, tipo_violencia),
-    FOREIGN KEY (id_preenchimento) REFERENCES PREENCHIMENTO_PROFISSIONAL(id_preenchimento) ON DELETE CASCADE
-);
 
 CREATE TABLE HISTORICO (
     id SERIAL PRIMARY KEY,
@@ -1428,6 +1422,182 @@ ORDER BY id_caso ASC
 LIMIT 80;
 
 
+-- Povoamento Tabela AMEACA_VIOLENCIA
+INSERT INTO AMEACAS_VIOLENCIA (id_violencia, id_caso, id_assistida, tipo_ameaca)
+VALUES 
+    (1, 1, 1, 'AMEACA DE MORTE'),
+    (1, 1, 1, 'RETIRAR A GUARDA DOS FILHOS'),
+    (2, 2, 2, 'DIFAMACAO PUBLICA'),
+    (2, 2, 2, 'DIVULGACAO DE FOTOS INTIMAS'),
+    (3, 3, 3, 'AMEACA DE MORTE'),
+    (3, 3, 3, 'AMEACA COM ARMA DE FOGO'),
+    (3, 3, 3, 'AMEACA CONTRA FAMILIARES'),
+    (4, 4, 4, 'ESPANCAMENTO'),
+    (4, 4, 4, 'QUEIMADURA'),
+    (5, 6, 6, 'AMEACA DE SUICIDIO DO AGRESSOR'),
+    (6, 8, 8, 'AMEACA PATRIMONIAL (QUEBRAR OBJETOS)'),
+    (6, 8, 8, 'EXPULSAO DE CASA'),
+    (7, 10, 10, 'DESCUMPRIMENTO DE MEDIDA PROTETIVA'),
+    (7, 10, 10, 'AMEACA POR TELEFONE/MENSAGEM'),
+    (8, 12, 12, 'AMEACA DE ABANDONO MATERIAL'),
+    (9, 14, 14, 'SEQUESTRAR OS FILHOS'),
+    (9, 14, 14, 'AGREDIR OS FILHOS'),
+    (10, 16, 16, 'AMEACA DE MORTE'),
+    (10, 16, 16, 'AMEACA COM ARMA BRANCA (FACA)'),
+    (11, 18, 18, 'AMEACA DE MORTE SE DENUNCIAR'),
+    (12, 20, 20, 'AMEACA DE ABUSO SEXUAL'),
+    (13, 22, 22, 'AMEACA DE ISOLAMENTO SOCIAL'),
+    (14, 28, 28, 'AMEACA DE INTERDICAO MENTAL'),
+    (14, 28, 28, 'AMEACA DE DEMISSAO NO TRABALHO'),
+    (15, 31, 31, 'DESTRUICAO DE DOCUMENTOS'),
+    (15, 31, 31, 'RETENCAO DE SALARIO'),
+    (16, 33, 33, 'AMEACA DE MORTE'),
+    (16, 33, 33, 'AMEACA DE INCENDIO A RESIDENCIA'),
+    (17, 35, 35, 'AMEACA DE AGRESSAO FISICA GRAVE'),
+    (18, 43, 43, 'PERSEGUICAO (STALKING)'),
+    (19, 49, 49, 'AMEACA DE MORTE'),
+    (20, 53, 53, 'AMEACA DE VINGANCA');
+
+-- Povoamento Tabela COMPORTAMENTO_VIOLENCIA
+INSERT INTO COMPORTAMENTO_VIOLENCIA (id_violencia, id_caso, id_assistida, descricao_comportamento)
+VALUES 
+    (1, 1, 1, 'CIUMES EXCESSIVO E POSSESSIVIDADE'),
+    (1, 1, 1, 'CONTROLE DE HORARIOS E SAIDAS'),
+    (2, 2, 2, 'HUMILHACAO EM PUBLICO'),
+    (2, 2, 2, 'CRITICAS CONSTANTES A APARENCIA'),
+    (3, 3, 3, 'ISOLAMENTO DE AMIGOS E FAMILIARES'),
+    (3, 3, 3, 'IMPEDIMENTO DE FREQUENTAR CULTOS RELIGIOSOS'),
+    (4, 4, 4, 'EXPLOSOES DE RAIVA REPENTINAS'),
+    (4, 4, 4, 'QUEBRA DE OBJETOS DENTRO DE CASA'),
+    (5, 6, 6, 'PERSEGUICAO NO TRAJETO TRABALHO-CASA'),
+    (6, 8, 8, 'USO DE FILHOS PARA CHANTAGEM'),
+    (7, 10, 10, 'MONITORAMENTO DE CELULAR E REDES SOCIAIS'),
+    (7, 10, 10, 'EXIGENCIA DE SENHAS PESSOAIS'),
+    (8, 12, 12, 'CONTROLE RIGOROSO DAS FINANCAS'),
+    (9, 14, 14, 'NEGACAO DE ACESSO A MEDICAMENTOS'),
+    (10, 16, 16, 'MANIPULACAO EMOCIONAL APOS AGRESSOES'),
+    (11, 18, 18, 'CULPABILIZACAO DA VITIMA PELA VIOLENCIA'),
+    (12, 20, 20, 'MAUS TRATOS CONTRA ANIMAIS DE ESTIMACAO'),
+    (13, 22, 22, 'PROIBICAO DE TRABALHAR OU ESTUDAR'),
+    (14, 28, 28, 'DIFAMACAO PARA FAMILIARES E VIZINHOS'),
+    (15, 31, 31, 'RETENCAO DE DOCUMENTOS PESSOAIS'),
+    (15, 31, 31, 'CONTROLE DE GASTOS DOMESTICOS'),
+    (16, 33, 33, 'EXIBICAO DE ARMA DE FOGO PARA INTIMIDAR'),
+    (17, 35, 35, 'GRITOS E XINGAMENTOS NA FRENTE DOS FILHOS'),
+    (18, 43, 43, 'ENVIO EXCESSIVO DE MENSAGENS E LIGACOES'),
+    (19, 49, 49, 'AMEACA DE SUICIDIO CASO A VITIMA SAIA DE CASA'),
+    (20, 53, 53, 'PERTURBACAO NO LOCAL DE TRABALHO DA VITIMA');
+
+-- Povoamento Tabela REDE_DE_APOIO
+INSERT INTO REDE_DE_APOIO (Email, Nome)
+VALUES 
+    ('deam.central@policiacivil.gov.br', 'DELEGACIA ESPECIALIZADA DE ATENDIMENTO A MULHER - DEAM'),
+    ('coord.creas@prefeitura.gov.br', 'CENTRO DE REFERENCIA ESPECIALIZADO DE ASSISTENCIA SOCIAL - CREAS'),
+    ('cras.sul@prefeitura.gov.br', 'CENTRO DE REFERENCIA DE ASSISTENCIA SOCIAL - CRAS SUL'),
+    ('cras.norte@prefeitura.gov.br', 'CENTRO DE REFERENCIA DE ASSISTENCIA SOCIAL - CRAS NORTE'),
+    ('atendimento.mulher@defensoria.gov.br', 'DEFENSORIA PUBLICA - NUCLEO DE DEFESA DA MULHER'),
+    ('promotoria.violencia@mp.gov.br', 'MINISTERIO PUBLICO - PROMOTORIA DA MULHER'),
+    ('servicosocial@hospitalgeral.gov.br', 'HOSPITAL GERAL - SETOR DE ASSISTENCIA SOCIAL'),
+    ('acolhimento@casaabrigo.org', 'CASA ABRIGO ESPERANCA'),
+    ('conselhotutelar.zona1@prefeitura.gov.br', 'CONSELHO TUTELAR - ZONA 1'),
+    ('vara.violencia@tj.gov.br', 'JUIZADO DE VIOLENCIA DOMESTICA E FAMILIAR'),
+    ('contato@coletivomulheres.org', 'ONG COLETIVO MULHERES UNIDAS'),
+    ('disque180@mdh.gov.br', 'CENTRAL DE ATENDIMENTO A MULHER - LIGUE 180'),
+    ('patrulha.maria.penha@pm.gov.br', 'PATRULHA MARIA DA PENHA - POLICIA MILITAR'),
+    ('caps.ad@saude.gov.br', 'CENTRO DE ATENCAO PSICOSSOCIAL - CAPS AD'),
+    ('nucleo.psicologia@universidade.edu.br', 'CLINICA ESCOLA DE PSICOLOGIA - UNICENTRO'),
+    ('sos.mulher@fundacao.org.br', 'FUNDACAO SOS MULHER'),
+    ('juridico@oab.org.br', 'COMISSAO DA MULHER ADVOGADA - OAB'),
+    ('imlsede@policiacientifica.gov.br', 'INSTITUTO MEDICO LEGAL - IML'),
+    ('coord.habitacao@prefeitura.gov.br', 'SECRETARIA DE HABITACAO - PROGRAMA ALUGUEL SOCIAL'),
+    ('bancodeempregos@sine.gov.br', 'SINE - SISTEMA NACIONAL DE EMPREGO');
+
+-- Povoamento Tabela AMEACAS_VIOLENCIA
+INSERT INTO AMEACAS_VIOLENCIA (id_violencia, id_caso, id_assistida, tipo_ameaca)
+VALUES 
+    (1, 1, 1, 'AMEACA DE MORTE'),
+    (2, 2, 2, 'DIFAMACAO PUBLICA'),
+    (3, 3, 3, 'AMEACA COM ARMA DE FOGO'),
+    (4, 4, 4, 'ESPANCAMENTO'),
+    (5, 5, 5, 'AMEACA DE SUICIDIO DO AGRESSOR'),
+    (6, 6, 6, 'AMEACA PATRIMONIAL'),
+    (7, 7, 7, 'DESCUMPRIMENTO DE MEDIDA PROTETIVA'),
+    (8, 8, 8, 'AMEACA DE ABANDONO MATERIAL'),
+    (9, 9, 9, 'SEQUESTRAR OS FILHOS'),
+    (10, 10, 10, 'AMEACA COM ARMA BRANCA'),
+    (11, 11, 11, 'AMEACA DE MORTE SE DENUNCIAR'),
+    (12, 12, 12, 'AMEACA DE ABUSO SEXUAL'),
+    (13, 13, 13, 'AMEACA DE ISOLAMENTO SOCIAL'),
+    (14, 14, 14, 'AMEACA DE INTERDICAO MENTAL'),
+    (15, 15, 15, 'DESTRUICAO DE DOCUMENTOS'),
+    (16, 16, 16, 'AMEACA DE INCENDIO A RESIDENCIA'),
+    (17, 17, 17, 'AMEACA DE AGRESSAO FISICA GRAVE'),
+    (18, 18, 18, 'PERSEGUICAO (STALKING)'),
+    (19, 19, 19, 'AMEACA DE VINGANCA'),
+    (20, 20, 20, 'AMEACA DE MORTE'),
+    (21, 21, 21, 'RETIRAR A GUARDA DOS FILHOS'),
+    (22, 22, 22, 'DIVULGACAO DE FOTOS INTIMAS'),
+    (23, 23, 23, 'AMEACA CONTRA FAMILIARES'),
+    (24, 24, 24, 'QUEIMADURA'),
+    (25, 25, 25, 'EXPULSAO DE CASA'),
+    (26, 26, 26, 'AMEACA POR TELEFONE'),
+    (27, 27, 27, 'AGREDIR OS FILHOS'),
+    (28, 28, 28, 'AMEACA DE MORTE'),
+    (29, 29, 29, 'AMEACA COM ARMA DE FOGO'),
+    (30, 30, 30, 'AMEACA DE DEMISSAO NO TRABALHO'),
+    (31, 31, 31, 'RETENCAO DE SALARIO'),
+    (32, 32, 32, 'AMEACA DE MORTE'),
+    (33, 33, 33, 'AMEACA DE AGRESSAO FISICA'),
+    (34, 34, 34, 'AMEACA CONTRA AMIGOS'),
+    (35, 35, 35, 'AMEACA DE SUICIDIO'),
+    (36, 36, 36, 'AMEACA DE MORTE'),
+    (37, 37, 37, 'AMEACA PATRIMONIAL'),
+    (38, 38, 38, 'AMEACA DE SEQUESTRO'),
+    (39, 39, 39, 'AMEACA DE ESTUPRO'),
+    (40, 40, 40, 'AMEACA DE MORTE'),
+    (41, 41, 41, 'AMEACA DE AGRESSAO'),
+    (42, 42, 42, 'AMEACA DE MORTE'),
+    (43, 43, 43, 'AMEACA CONTRA ANIMAIS'),
+    (44, 44, 44, 'AMEACA DE EXPULSAO'),
+    (45, 45, 45, 'AMEACA DE MORTE'),
+    (46, 46, 46, 'AMEACA DE DIFAMACAO'),
+    (47, 47, 47, 'AMEACA DE MORTE'),
+    (48, 48, 48, 'AMEACA DE AGRESSAO'),
+    (49, 49, 49, 'AMEACA DE MORTE'),
+    (50, 50, 50, 'AMEACA DE VINGANCA'),
+    (51, 51, 51, 'AMEACA DE MORTE'),
+    (52, 52, 52, 'AMEACA DE AGRESSAO'),
+    (53, 53, 53, 'AMEACA DE MORTE'),
+    (54, 54, 54, 'AMEACA DE SUICIDIO'),
+    (55, 55, 55, 'AMEACA DE MORTE'),
+    (56, 56, 56, 'AMEACA DE AGRESSAO'),
+    (57, 57, 57, 'AMEACA DE MORTE'),
+    (58, 58, 58, 'AMEACA PATRIMONIAL'),
+    (59, 59, 59, 'AMEACA DE MORTE'),
+    (60, 60, 60, 'AMEACA DE AGRESSAO'),
+    (61, 61, 61, 'AMEACA DE MORTE'),
+    (62, 62, 62, 'AMEACA CONTRA FILHOS'),
+    (63, 63, 63, 'AMEACA DE MORTE'),
+    (64, 64, 64, 'AMEACA DE AGRESSAO'),
+    (65, 65, 65, 'AMEACA DE MORTE'),
+    (66, 66, 66, 'AMEACA DE SUICIDIO'),
+    (67, 67, 67, 'AMEACA DE MORTE'),
+    (68, 68, 68, 'AMEACA DE AGRESSAO'),
+    (69, 69, 69, 'AMEACA DE MORTE'),
+    (70, 70, 70, 'AMEACA PATRIMONIAL'),
+    (71, 71, 71, 'AMEACA DE MORTE'),
+    (72, 72, 72, 'AMEACA DE AGRESSAO'),
+    (73, 73, 73, 'AMEACA DE MORTE'),
+    (74, 74, 74, 'AMEACA CONTRA FAMILIA'),
+    (75, 75, 75, 'AMEACA DE MORTE'),
+    (76, 76, 76, 'AMEACA DE AGRESSAO'),
+    (77, 77, 77, 'AMEACA DE MORTE'),
+    (78, 78, 78, 'AMEACA DE SUICIDIO'),
+    (79, 79, 79, 'AMEACA DE MORTE'),
+    (80, 80, 80, 'AMEACA DE AGRESSAO');
+
+
+
 ------------------
 -- Queries SQL  --
 ------------------
@@ -1443,36 +1613,7 @@ AND a.endereco IS NOT NULL
 GROUP BY a.endereco            
 ORDER BY quantidade DESC;
 
--- Query 2: Query utilizada para trazer informações necessárias da tela de assistidas, no qual tem uma visão geral do caso relacionado a uma assistida, importantes para o jurídico ter uma análise dos tipos de violência e o agressor relacionado a um caso específico
-
-SELECT
-    c.id_caso,
-    a.id as id_assistida,
-    a.nome as nomeAssistida,
-    ag.nome as nomeAgressor,
-    c.data,
-    pp.assistida_respondeu_sem_ajuda,
-    pp.assistida_respondeu_com_auxilio,
-    pp.assistida_sem_condicoes,
-    pp.assistida_recusou,
-    pp.terceiro_comunicante,
-    array_agg(DISTINCT tv.tipo_violencia) as tipoViolencia
-FROM
-    caso c
-LEFT JOIN assistida a ON c.id_assistida = a.id
-LEFT JOIN agressor ag ON c.id_caso = ag.id_caso
-LEFT JOIN preenchimento_profissional pp ON pp.id_caso = c.id_caso
-LEFT JOIN tipo_violencia_preenchimento tv ON tv.id_preenchimento = pp.id_preenchimento
-WHERE 
-    c.id_caso = 20
-GROUP BY 
-c.id_caso, 
-a.id, a.nome, ag.nome, 
-c.data, pp.assistida_respondeu_sem_ajuda, 
-pp.assistida_respondeu_com_auxilio, pp.assistida_sem_condicoes, 
-pp.assistida_recusou, pp.terceiro_comunicante;
-
--- Query 3: Endereços com maior número de filhos com deficiência que sofreram violência, ou que presenciaram violencia doméstica
+-- Query 2: Endereços com maior número de filhos com deficiência que sofreram violência, ou que presenciaram violencia doméstica
 
 SELECT
   a.endereco, COUNT(f.qtd_filhos_deficiencia) AS quantidade
@@ -1482,7 +1623,7 @@ WHERE (f.viu_violencia OR f.violencia_gravidez) AND f.qtd_filhos_deficiencia > 0
 GROUP BY a.endereco
 ORDER BY quantidade DESC;
 
--- Query 4: Tempo médio entre a data de ocorrência da violência e a data de realização da denúncia, categoriazado por tipo de violência.
+-- Query 3: Tempo médio entre a data de ocorrência da violência e a data de realização da denúncia, categoriazado por tipo de violência.
 
 select
     tpv.tipo_violencia as "Tipos de Violência",
@@ -1504,7 +1645,7 @@ group by
 order by
     "Média de dias até a realização da Denúncia" desc;
 
--- Query 5: Diferença em dias entre a data de ocorrência da violência e a data de realização da denúncia para casos onde a assistida possui filhos com o agressor. 
+-- Query 4: Diferença em dias entre a data de ocorrência da violência e a data de realização da denúncia para casos onde a assistida possui filhos com o agressor. 
 
 select 
   (c.data - v.data_ocorrencia) as "Dias de Diferença" 
@@ -1521,7 +1662,7 @@ and exists (
     and f.qtd_filho_agressor > 0 
 );
 
--- Query 6: Análise se o agressor estava sob efeito de algum entorpecente quando fez a agressão, quem ele agrediu, e quantas vezes:
+-- Query 5: Análise se o agressor estava sob efeito de algum entorpecente quando fez a agressão, quem ele agrediu, e quantas vezes:
 
 SELECT 
     sa.tipo_substancia AS Agressor_Sob_Efeito_De,
@@ -1536,7 +1677,7 @@ WHERE sa.tipo_substancia NOT ILIKE '%NAO%'
 GROUP BY sa.tipo_substancia, aa.alvo_ameaca, tv.tipo_violencia
 ORDER BY Ocorrencias DESC;
 
--- Query 7: Análise da média de tempo que uma assistida demora para prestar queixa dependendo do seu relacionamento com o agressor
+-- Query 6: Análise da média de tempo que uma assistida demora para prestar queixa dependendo do seu relacionamento com o agressor
 
 SELECT 
     ag.Vinculo AS Relacionamento,
@@ -1553,7 +1694,7 @@ WHERE
 GROUP BY ag.Vinculo
 ORDER BY AVG(c.data - v.data_ocorrencia) DESC;
 
--- Query 8: Análise de quantos tipos de agressão ocorreram com assistidas menores de idade
+-- Query 7: Análise de quantos tipos de agressão ocorreram com assistidas menores de idade
 
 SELECT 
     tipos_fixos.nome_tipo AS Tipo_de_Violencia,
@@ -1571,7 +1712,7 @@ LEFT JOIN
 GROUP BY tipos_fixos.nome_tipo
 ORDER BY Qtd_Vitimas_Menores DESC;
 
--- Query 9: Análise da quantidade de agressores por faixa etária
+-- Query 8: Análise da quantidade de agressores por faixa etária
 
 SELECT 
     ref.faixa AS Faixa_Etaria,
@@ -1599,7 +1740,7 @@ LEFT JOIN
 GROUP BY ref.faixa, ref.id_ordem
 ORDER BY ref.id_ordem ASC;
 
--- Query 10: Ocorrência de abuso sexual em Assistidas com deficiência ou doença degenerativa por idade
+-- Query 09: Ocorrência de abuso sexual em Assistidas com deficiência ou doença degenerativa por idade
 
 select distinct
   a.id as "ID da Assistida",
@@ -1612,7 +1753,7 @@ join violencia v ON a.id = v.id_assistida
 where v.estupro is true and a.deficiencia != 'NAO INFORMADO'
 order by a.idade desc;
 
--- Query 11: Tipo de Violência baseado em cor/raça
+-- Query 10: Tipo de Violência baseado em cor/raça
 
 select
   brancas.tipo_violencia as "Tipo de Violência",
@@ -1633,7 +1774,7 @@ full outer join
 on brancas.tipo_violencia = nbrancas.tipo_violencia
 order by vitimas_nao_brancas desc;
 
--- Query 12: Análise comparativa da prevalência de violência patrimonial e psicológica segregada pelo status de dependência financeira da vítima
+-- Query 11: Análise comparativa da prevalência de violência patrimonial e psicológica segregada pelo status de dependência financeira da vítima
 
 SELECT 
     CASE 
@@ -1656,7 +1797,7 @@ JOIN TIPO_VIOLENCIA TV ON V.id_violencia = TV.id_violencia
 GROUP BY C.depen_finc
 ORDER BY C.depen_finc DESC;
 
--- Query 13: Distribuição percentual das assistidas estratificada por nível de escolaridade para identificação do perfil educacional predominante
+-- Query 12: Distribuição percentual das assistidas estratificada por nível de escolaridade para identificação do perfil educacional predominante
 
 SELECT  
     A.escolaridade AS "Nível de Escolaridade",   

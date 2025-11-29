@@ -108,6 +108,14 @@ CREATE TABLE FUNCIONARIO_ACOMPANHA_CASO (
     CONSTRAINT PK_func PRIMARY KEY(email_funcionario, id_caso)
 );
 
+CREATE TABLE ASSISTIDA_REDE_APOIO (
+    id_assistida INT NOT NULL,
+    email_rede VARCHAR(100),
+    FOREIGN KEY(email_rede) REFERENCES REDE_DE_APOIO(Email),
+    FOREIGN KEY(id_assistida) REFERENCES ASSISTIDA(id),
+    CONSTRAINT PK_assistida_rede PRIMARY KEY(id_assistida, email_rede)
+);
+
 -- 3. AGRESSOR E MULTIVALORADOS
 
 CREATE TABLE AGRESSOR (

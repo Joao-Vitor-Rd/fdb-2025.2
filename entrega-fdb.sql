@@ -1504,7 +1504,7 @@ group by
 order by
     "Média de dias até a realização da Denúncia" desc;
 
--- Query 5: Diferença em dias entre a data de ocorrência da violência e a data de realização da denúncia para casos onde a assistida possui filhos que são agressores. 
+-- Query 5: Diferença em dias entre a data de ocorrência da violência e a data de realização da denúncia para casos onde a assistida possui filhos com o agressor. 
 
 select 
   (c.data - v.data_ocorrencia) as "Dias de Diferença" 
